@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf3e5" />
+    <title>תבנית משחק</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell" aria-live="polite">
+      <section class="game-card" id="gameCard">
+        <div class="topbar">
+          <p class="game-title" id="gameTitle">תבנית משחק</p>
+          <p class="progress" id="progressText" hidden></p>
+        </div>
+
+        <div class="status-badge" id="endBadge" hidden>סיום</div>
+
+        <figure class="page-image-wrap" id="imageWrap" hidden>
+          <img class="page-image" id="pageImage" alt="" />
+        </figure>
+
+        <article class="content-area">
+          <h1 class="page-title" id="pageTitle"></h1>
+          <p class="page-body" id="pageBody"></p>
+          <p class="page-note" id="pageNote" hidden></p>
+        </article>
+
+        <div class="actions">
+          <button class="primary-button" id="nextButton" type="button">הבא</button>
+          <button class="secondary-button" id="restartButton" type="button" hidden>התחל מחדש</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
