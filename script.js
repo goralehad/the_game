@@ -6,6 +6,7 @@
     language: "he",
     direction: "rtl",
     nextButtonText: "הבא",
+    previousButtonText: "הקודם",
     endText: "סיום",
     restartButtonText: "התחל מחדש",
     showProgress: true,
@@ -23,6 +24,7 @@
     pageBody: document.getElementById("pageBody"),
     pageNote: document.getElementById("pageNote"),
     nextButton: document.getElementById("nextButton"),
+    previousButton: document.getElementById("previousButton"),
     restartButton: document.getElementById("restartButton")
   };
 
@@ -70,6 +72,7 @@
     document.title = settings.gameTitle || DEFAULT_SETTINGS.gameTitle;
     els.gameTitle.textContent = settings.gameTitle || DEFAULT_SETTINGS.gameTitle;
     els.nextButton.textContent = settings.nextButtonText || DEFAULT_SETTINGS.nextButtonText;
+    els.previousButton.textContent = settings.previousButtonText || DEFAULT_SETTINGS.previousButtonText;
     els.restartButton.textContent = settings.restartButtonText || DEFAULT_SETTINGS.restartButtonText;
   }
 
@@ -93,11 +96,14 @@
 
     els.endBadge.textContent = settings.endText || DEFAULT_SETTINGS.endText;
     els.endBadge.hidden = !isFinalPage;
+    els.previousButton.hidden = currentPageIndex === 0;
     els.nextButton.hidden = isFinalPage;
     els.restartButton.hidden = !(isFinalPage && settings.showRestartOnEnd);
 
     if (!isFinalPage) {
       els.nextButton.focus({ preventScroll: true });
+    } else if (currentPageIndex > 0) {
+      els.previousButton.focus({ preventScroll: true });
     }
   }
 
@@ -133,6 +139,7 @@
     els.pageNote.hidden = true;
     els.pageTitle.textContent = "משהו לא נטען כמו שצריך";
     els.pageBody.textContent = message || "אירעה תקלה בטעינת המשחק. בדוק את קובץ content.json.";
+    els.previousButton.hidden = true;
     els.nextButton.hidden = true;
     els.restartButton.hidden = true;
   }
@@ -163,6 +170,13 @@
   els.nextButton.addEventListener("click", () => {
     if (currentPageIndex < pages.length - 1) {
       currentPageIndex += 1;
+      renderPage();
+    }
+  });
+
+  els.previousButton.addEventListener("click", () => {
+    if (currentPageIndex > 0) {
+      currentPageIndex -= 1;
       renderPage();
     }
   });
